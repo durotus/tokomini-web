@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Mini - Jajanan Mini, Lezatnya Maksi!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#FFFBEB',
+                            primary: '#D97706',
+                            dark: '#78350F',
+                            accent: '#F59E0B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFFDF9; }
+        .header-title { font-family: 'Fredoka', sans-serif; }
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #D97706; border-radius: 10px; }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen">
+
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-orange-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <div class="bg-brand-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-store text-lg"></i>
+                    </div>
+                    <span class="header-title text-2xl font-bold text-brand-dark tracking-wide">Toko Mini</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#katalog" class="text-slate-600 hover:text-brand-primary font-medium transition-colors">Menu Katalog</a>
+                    <a href="#cara-order" class="text-slate-600 hover:text-brand-primary font-medium transition-colors">Cara Pesan</a>
+                </div>
+                <button onclick="toggleCart()" class="relative bg-brand-light hover:bg-orange-100 border border-orange-200 p-2.5 px-4 rounded-full flex items-center gap-2 text-brand-dark transition-all duration-300">
+                    <i class="fa-solid fa-shopping-basket text-lg"></i>
+                    <span class="font-semibold hidden sm:inline">Keranjang</span>
+                    <span id="cart-count" class="bg-brand-primary text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center absolute -top-1 -right-1">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative overflow-hidden bg-gradient-to-b from-orange-50 to-orange-100/30 py-16 text-center">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <span class="bg-orange-200/60 text-brand-dark text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider inline-block mb-4">Camilan Mini Kekinian</span>
+            <h1 class="header-title text-4xl sm:text-5xl font-bold text-brand-dark leading-tight mb-4">
+                Jajanan Mini, <span class="text-brand-primary">Lezatnya Maksi!</span>
+            </h1>
+            <p class="text-slate-600 text-sm sm:text-base max-w-xl mx-auto mb-6">
+                Menghadirkan camilan mini favoritmu! Mulai dari Pisang Goreng Coklat lumer, Cireng isi gurih, hingga Donat mini empuk yang siap nemenin harimu.
+            </p>
+            <a href="#katalog" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-full shadow-md transition-all inline-block">
+                Lihat Menu <i class="fa-solid fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <main id="katalog" class="max-w-7xl mx-auto px-4 py-12 flex-grow">
+        <div class="text-center mb-10">
+            <h2 class="header-title text-3xl font-bold text-brand-dark mb-2">Menu Spesial Toko Mini</h2>
+            <div class="w-16 h-1 bg-brand-primary mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                <div class="aspect-[4/3] bg-amber-100 flex items-center justify-center text-brand-dark font-bold text-lg">🍌 Pisang Goreng Coklat</div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="header-title text-lg font-bold text-brand-dark mb-1">Pisang Goreng Coklat Mini</h3>
+                    <p class="text-slate-500 text-xs mb-4 flex-grow">Pisang krispi disiram coklat premium melimpah dan lumer.</p>
+                    <div class="mb-4">
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Topping:</label>
+                        <select id="pilihan-pisang" class="w-full bg-slate-50 border text-xs rounded-lg p-2 outline-none">
+                            <option value="Coklat Original">Coklat Original (Rp 10.000)</option>
+                            <option value="Coklat + Taburan Keju">Coklat + Taburan Keju (+Rp 2.000)</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-between items-center pt-3 border-t">
+                        <span class="text-base font-bold text-brand-primary">Rp 10.000</span>
+                        <button onclick="addToCart('Pisang Goreng Coklat Mini', 10000, 'pilihan-pisang')" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs px-3 py-2 rounded-lg transition-all">
+                            + Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                <div class="aspect-[4/3] bg-orange-100 flex items-center justify-center text-brand-dark font-bold text-lg">🥟 Cireng Isi Gurih</div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="header-title text-lg font-bold text-brand-dark mb-1">Cireng Mini Isi Gurih</h3>
+                    <p class="text-slate-500 text-xs mb-4 flex-grow">Cireng mini krispi kenyal lezat dengan bumbu rempah melimpah.</p>
+                    <div class="mb-4">
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilihan Rasa:</label>
+                        <select id="pilihan-cireng" class="w-full bg-slate-50 border text-xs rounded-lg p-2 outline-none">
+                            <option value="Ayam Pedas Suwir">Ayam Pedas Suwir (Rp 12.000 / 5 pcs)</option>
+                            <option value="Keju Lumer">Keju Lumer (Rp 12.000 / 5 pcs)</option>
+                            <option value="Sosis Bakar Mayo">Sosis Bakar Mayo (Rp 12.000 / 5 pcs)</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-between items-center pt-3 border-t">
+                        <span class="text-base font-bold text-brand-primary">Rp 12.000</span>
+                        <button onclick="addToCart('Cireng Mini Isi Gurih', 12000, 'pilihan-cireng')" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs px-3 py-2 rounded-lg transition-all">
+                            + Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                <div class="aspect-[4/3] bg-rose-100 flex items-center justify-center text-brand-dark font-bold text-lg">🍩 Donat Mini Manis</div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="header-title text-lg font-bold text-brand-dark mb-1">Donat Mini Manis</h3>
+                    <p class="text-slate-500 text-xs mb-4 flex-grow">Donat kentang mini super lembut, empuk, dan ringan di mulut.</p>
+                    <div class="mb-4">
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Topping:</label>
+                        <select id="pilihan-donat" class="w-full bg-slate-50 border text-xs rounded-lg p-2 outline-none">
+                            <option value="Gula Halus Klasik">Gula Halus Klasik (Rp 15.000 / box)</option>
+                            <option value="Meses Coklat Warna-Warni">Meses Coklat (Rp 15.000 / box)</option>
+                            <option value="Keju Parut Gurih">Keju Parut Gurih (Rp 17.000 / box)</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-between items-center pt-3 border-t">
+                        <span class="text-base font-bold text-brand-primary">Rp 15.000</span>
+                        <button onclick="addToCart('Donat Mini Manis', 15000, 'pilihan-donat')" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs px-3 py-2 rounded-lg transition-all">
+                            + Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <section id="cara-order" class="bg-orange-50/50 border-t border-b border-orange-100 py-10 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="header-title text-2xl font-bold text-brand-dark mb-6">Cara Pemesanan</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto text-sm text-slate-500">
+                <div>⚠️ <b>1. Pilih Menu</b><p>Pilih jajanan dan klik "+ Tambah"</p></div>
+                <div>📝 <b>2. Isi Form Alamat</b><p>Buka keranjang, ketik nama & alamat kirim</p></div>
+                <div>💬 <b>3. Kirim ke WhatsApp</b><p>Klik tombol pesan, otomatis kirim chat WA!</p></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-brand-dark text-orange-200 py-6 text-center text-xs">
+        <p>&copy; 2026 Toko Mini. All Rights Reserved. Made with ❤️</p>
+    </footer>
+
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-xl translate-x-full transition-transform duration-300 border-l border-orange-100 flex flex-col">
+        <div class="p-4 border-b flex justify-between items-center bg-orange-50/50">
+            <h3 class="header-title font-bold text-brand-dark text-lg">Keranjang Belanja</h3>
+            <button onclick="toggleCart()" class="text-slate-400 hover:text-slate-600 font-bold">X</button>
+        </div>
+        <div id="cart-items-container" class="p-4 flex-grow overflow-y-auto space-y-3">
+            <p class="text-center text-slate-400 text-sm py-8">Keranjang belanja kosong.</p>
+        </div>
+        <div class="p-4 border-t bg-slate-50">
+            <h4 class="font-bold text-xs text-brand-dark mb-2">Informasi Penerima:</h4>
+            <div class="space-y-2 mb-4">
+                <input type="text" id="cust-name" placeholder="Nama Lengkap Anda..." class="w-full bg-white border text-xs rounded-lg p-2 outline-none">
+                <textarea id="cust-address" placeholder="Alamat Pengiriman Lengkap..." class="w-full bg-white border text-xs rounded-lg p-2 h-12 resize-none outline-none"></textarea>
+            </div>
+            <div class="flex justify-between items-center mb-4 font-bold text-sm">
+                <span>Total:</span><span id="cart-total-price" class="text-brand-primary">Rp 0</span>
+            </div>
+            <button onclick="checkoutViaWA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 text-sm rounded-xl flex items-center justify-center gap-2">
+                🟢 Kirim Pesanan ke WhatsApp
+            </button>
+        </div>
+    </div>
+    <div id="cart-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
+
+    <script>
+        // GANTI NOMOR INI JADI NOMOR WHATSAPP-MU (Format: 628xxx tanpa tanda +)
+        const NOMOR_WHATSAPP = "628137385186"; 
+
+        let cart = [];
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('translate-x-full');
+            document.getElementById('cart-overlay').classList.toggle('hidden');
+        }
+
+        function addToCart(productName, basePrice, selectId) {
+            const selectElement = document.getElementById(selectId);
+            const selectedOption = selectElement.options[selectElement.selectedIndex].value;
+            
+            let finalPrice = basePrice;
+            if (selectedOption.includes('+Rp 2.000')) finalPrice += 2000;
+            if (selectedOption.includes('Keju Parut Gurih')) finalPrice = 17000;
+
+            const existing = cart.find(item => item.name === productName && item.variant === selectedOption);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ name: productName, price: finalPrice, variant: selectedOption, quantity: 1 });
+            }
+
+            updateCartDisplay();
+            Swal.fire({ title: 'Masuk Keranjang!', text: productName, icon: 'success', timer: 1000, showConfirmButton: false, toast: true, position: 'top-end' });
+        }
+
+        function updateCartDisplay() {
+            const container = document.getElementById('cart-items-container');
+            const countElement = document.getElementById('cart-count');
+            const totalElement = document.getElementById('cart-total-price');
+
+            countElement.innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-center text-slate-400 text-sm py-8">Keranjang belanja kosong.</p>';
+                totalElement.innerText = "Rp 0";
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+            cart.forEach((item, idx) => {
+                total += item.price * item.quantity;
+                html += `
+                    <div class="bg-slate-50 p-2.5 border rounded-xl flex justify-between items-center text-xs">
+                        <div>
+                            <p class="font-bold text-slate-700">${item.name}</p>
+                            <p class="text-[10px] text-slate-400">${item.variant.split(' (')[0]}</p>
+                            <p class="text-brand-primary font-semibold">Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</p>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="changeQty(${idx}, -1)" class="bg-white border w-5 h-5 rounded flex items-center justify-center font-bold">-</button>
+                            <span class="font-bold">${item.quantity}</span>
+                            <button onclick="changeQty(${idx}, 1)" class="bg-white border w-5 h-5 rounded flex items-center justify-center font-bold">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            totalElement.innerText = "Rp " + total.toLocaleString('id-ID');
+        }
+
+        function changeQty(idx, amt) {
+            cart[idx].quantity += amt;
+            if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+            updateCartDisplay();
+        }
+
+        function checkoutViaWA() {
+            const name = document.getElementById('cust-name').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+
+            if (cart.length === 0) { Swal.fire('Oops!', 'Keranjang masih kosong.', 'warning'); return; }
+            if (!name || !address) { Swal.fire('Belum Lengkap', 'Isi Nama & Alamat ya.', 'info'); return; }
+
+            let msg = `*PESANAN BARU TOKO MINI* 😋\n\n*Penerima:*\n👤 Nama: ${name}\n📍 Alamat: ${address}\n\n*Daftar Belanja:*\n`;
+            let total = 0;
+            cart.forEach((item, idx) => {
+                total += item.price * item.quantity;
+                msg += `${idx+1}. ${item.name} (${item.variant.split(' (')[0]}) x${item.quantity} = Rp ${(item.price*item.quantity).toLocaleString('id-ID')}\n`;
+            });
+            msg += `\n*TOTAL BAYAR: Rp ${total.toLocaleString('id-ID')}*\n\nMohon diproses ya Kak!`;
+
+            window.open(`https://wa.me/${NOMOR_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
