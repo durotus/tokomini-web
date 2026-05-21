@@ -76,6 +76,12 @@
                     <p class="text-slate-500 text-xs mb-4 flex-grow">Pisang ambon krispi goreng disiram coklat kental manis melimpah ditambah taburan parutan keju gurih melimpah.</p>
                     
                     <div class="mb-4">
+                         <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Rasa Utama (Base):</label>
+                        <select id="donat-glaze" class="w-full bg-white border border-slate-200 text-xs rounded-lg p-2 outline-none text-slate-700 font-medium">
+                            <option value="Rasa Coklat">jumbo</option>
+                            <option value="Rasa Matcha">medium</option>
+                            <option value="Rasa Stroberi">small</option>
+                        </select>
                         <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Topping:</label>
                         <select id="pilihan-pisang" class="w-full bg-slate-50 border border-slate-200 text-xs rounded-lg p-2 outline-none text-slate-700 font-medium">
                             <option value="Saus Coklat Original">Saus Coklat Original (Rp 10.000)</option>
@@ -102,9 +108,9 @@
                     <div class="mb-4">
                         <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Varian Isi:</label>
                         <select id="pilihan-cireng" class="w-full bg-slate-50 border border-slate-200 text-xs rounded-lg p-2 outline-none text-slate-700 font-medium">
-                            <option value="Isi Ayam">Cireng Isi Ayam (Rp 12.000)</option>
-                            <option value="Isi Sosis">Cireng Isi Sosis (Rp 12.000)</option>
-                            <option value="Isi Keju">Cireng Isi Keju (Rp 12.000)</option>
+                            <option value="Isi Ayam">Cireng Isi Ayam (Rp 12.000)/6pcs</option>
+                            <option value="Isi Sosis">Cireng Isi Sosis (Rp 12.000)/6pcs</option>
+                            <option value="Isi Keju">Cireng Isi Keju (Rp 12.000)/6pcs</option>
                         </select>
                     </div>
                     <div class="flex justify-between items-center pt-3 border-t border-slate-100">
@@ -122,16 +128,17 @@
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <h3 class="header-title text-lg font-bold text-brand-dark mb-1">Donat Mini Manis</h3>
-                    <p class="text-slate-500 text-xs mb-3 flex-grow">Donat kentang mini empuk super lembut. Silakan pilih rasa dasar glaze dan tambahkan topping favoritmu kesukaanmu!</p>
+                    <p class="text-slate-500 text-xs mb-3 flex-grow">Donat mini empuk super lembut. Silakan pilih rasa dasar glaze dan tambahkan topping favoritmu kesukaanmu!</p>
                     
                     <div class="mb-3">
                         <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Rasa Utama (Base):</label>
                         <select id="donat-glaze" class="w-full bg-white border border-slate-200 text-xs rounded-lg p-2 outline-none text-slate-700 font-medium">
-                            <option value="Rasa Coklat">Rasa Coklat (Rp 15.000)</option>
-                            <option value="Rasa Matcha">Rasa Matcha (Rp 15.000)</option>
-                            <option value="Rasa Stroberi">Rasa Stroberi (Rp 15.000)</option>
-                            <option value="Rasa Bluberi">Rasa Bluberi (Rp 15.000)</option>
-                            <option value="Rasa Tiramisu">Rasa Tiramisu (Rp 15.000)</option>
+                            <option value="Rasa Coklat">Rasa Coklat (Rp 15.000)/9pcs</option>
+                            <option value="Rasa Matcha">Rasa Matcha (Rp 15.000)/9pcs</option>
+                            <option value="Rasa Stroberi">Rasa Stroberi (Rp 15.000)/9pcs</option>
+                            <option value="Rasa Bluberi">Rasa Bluberi (Rp 15.000)/9pcs</option>
+                            <option value="Rasa Tiramisu">Rasa Tiramisu (Rp 15.000)9pcs</option>
+                            <option value="Rasa Tiramisu">Rasa Random (Rp 15.000)/9pcs</option>
                         </select>
                     </div>
 
@@ -143,6 +150,7 @@
                             <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="topping-donat" value="Meses" class="rounded accent-brand-primary"> Meses</label>
                             <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="topping-donat" value="Keju" class="rounded accent-brand-primary"> Keju</label>
                             <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="topping-donat" value="Marshmallow" class="rounded accent-brand-primary"> Marshmallow</label>
+                            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="topping-donat" value="Random" class="rounded accent-brand-primary"> Marshmallow</label>
                         </div>
                     </div>
 
@@ -193,7 +201,7 @@
 
     <script>
         // MASUKKAN NOMOR WHATSAPP ANDA DI SINI (Ganti dengan nomormu sendiri seperti langkah sebelumnya)
-        const NOMOR_WHATSAPP = "6281234567890"; 
+        const NOMOR_WHATSAPP = "628137385186"; 
 
         let listBelanja = [];
 
