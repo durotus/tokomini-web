@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kasir Pro - Toko Mini</title>
+    <title>Toko Mini - Jajanan Mini, Lezatnya Maksi!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
@@ -20,10 +20,11 @@
                         inter: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        kasir: {
-                            sidebar: '#2563EB', /* Biru utama kasirpro */
-                            bg: '#F8FAFC',
-                            textDark: '#1E293B'
+                        brand: {
+                            light: '#FFFBEB',
+                            primary: '#D97706',
+                            dark: '#78350F',
+                            accent: '#F59E0B'
                         }
                     }
                 }
@@ -31,68 +32,325 @@
         }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
-        .font-title { font-family: 'Fredoka', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FFFDF9; }
+        .header-title { font-family: 'Fredoka', sans-serif; }
     </style>
 </head>
-<body class="flex h-screen overflow-hidden text-slate-700">
+<body class="text-slate-800 flex flex-col min-h-screen">
 
-    <aside class="w-64 bg-kasir-sidebar text-white flex flex-col justify-between shadow-lg z-30 flex-shrink-0">
-        <div>
-            <div class="p-6 border-b border-blue-500 flex items-center gap-3">
-                <i class="fa-solid fa-calculator text-2xl"></i>
-                <span class="font-title text-2xl tracking-wide font-bold">KASIRPRO</span>
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-orange-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <div class="bg-brand-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-store text-lg"></i>
+                    </div>
+                    <span class="header-title text-2xl font-bold text-brand-dark tracking-wide">Toko Mini</span>
+                </div>
+                <div class="flex space-x-6 text-sm">
+                    <a href="#katalog" class="text-slate-600 hover:text-brand-primary font-medium transition-colors">Katalog</a>
+                    <a href="#dashboard" class="text-slate-600 hover:text-brand-primary font-medium transition-colors">Dashboard</a>
+                </div>
+                <button onclick="toggleCart()" class="relative bg-brand-light hover:bg-orange-100 border border-orange-200 p-2 px-4 rounded-full flex items-center gap-2 text-brand-dark transition-all">
+                    <i class="fa-solid fa-shopping-basket text-base"></i>
+                    <span id="cart-count" class="bg-brand-primary text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center absolute -top-1 -right-1">0</span>
+                </button>
             </div>
-            
-            <nav class="p-4 space-y-2">
-                <p class="text-blue-200 text-[10px] font-bold uppercase tracking-wider px-3 mb-1">Katalog Produk</p>
+        </div>
+    </nav>
 
-                <button onclick="switchView('menu-pisang')" id="nav-menu-pisang" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-blue-100 hover:bg-blue-700/50 hover:text-white transition-all bg-blue-700 text-white">
-                    <span>🍌</span> Pisang Goreng Coklat
-                </button>
+    <header class="bg-gradient-to-b from-orange-50 to-orange-100/20 py-12 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <span class="bg-orange-200/60 text-brand-dark text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider inline-block mb-3">Camilan Mini Kekinian</span>
+            <h1 class="header-title text-3xl sm:text-5xl font-bold text-brand-dark mb-3">Jajanan Mini, <span class="text-brand-primary">Lezatnya Maksi!</span></h1>
+            <p class="text-slate-600 text-xs sm:text-sm max-w-md mx-auto">Pilih jajanan homemade premium favoritmu di bawah ini, sesuaikan isi, lalu kirim langsung ke WhatsApp!</p>
+        </div>
+    </header>
 
-                <button onclick="switchView('menu-cireng')" id="nav-menu-cireng" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-blue-100 hover:bg-blue-700/50 hover:text-white transition-all">
-                    <span>🥟</span> Cireng Isi Gurih
-                </button>
-
-                <button onclick="switchView('menu-donat')" id="nav-menu-donat" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-blue-100 hover:bg-blue-700/50 hover:text-white transition-all">
-                    <span>🍩</span> Donat Mini Manis
-                </button>
-            </nav>
+    <main id="katalog" class="max-w-7xl mx-auto px-4 py-10 flex-grow w-full">
+        <div class="text-center mb-8">
+            <h2 class="header-title text-2xl font-bold text-brand-dark">Menu Istimewa Kami</h2>
+            <div class="w-12 h-1 bg-brand-primary mx-auto rounded-full mt-1"></div>
         </div>
 
-        <div class="p-4 border-t border-blue-500 bg-blue-700/40">
-            <button onclick="openCartModal()" class="w-full bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold py-2.5 px-4 rounded-xl flex items-center justify-between shadow transition-colors">
-                <span class="flex items-center gap-2"><i class="fa-solid fa-shopping-basket"></i> Keranjang</span>
-                <span id="sidebar-cart-count" class="bg-white text-amber-600 px-2 py-0.5 rounded-full text-[10px]">0</span>
+        <div id="product-grid-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            </div>
+    </main>
+
+    <section id="dashboard" class="bg-orange-50/40 border-t border-b border-orange-100 py-10">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-6">
+                <h2 class="header-title text-xl font-bold text-brand-dark flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-chart-pie text-brand-primary"></i> Dashboard Toko Mini
+                </h2>
+                <p class="text-xs text-slate-400 mt-1">Ringkasan manajemen menu dan statistik produk aktif saat ini</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                <div class="bg-white p-4 rounded-xl border border-orange-100 shadow-sm">
+                    <span class="text-xs text-slate-400 block font-medium">Total Jenis Menu</span>
+                    <span id="dash-total-menu" class="text-2xl font-bold text-brand-dark font-fredoka">0</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-orange-100 shadow-sm">
+                    <span class="text-xs text-slate-400 block font-medium">Menu Termurah</span>
+                    <span id="dash-min-price" class="text-base font-bold text-emerald-600">Rp 0</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-orange-100 shadow-sm">
+                    <span class="text-xs text-slate-400 block font-medium">Status Operasional</span>
+                    <span class="text-sm font-bold text-white bg-emerald-500 px-3 py-1 rounded-full inline-block mt-1">Buka / Menerima Order</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-brand-dark text-orange-200 py-6 text-center text-xs mt-auto">
+        <p>&copy; 2026 Toko Mini. All Rights Reserved. Made with ❤️</p>
+    </footer>
+
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-xl translate-x-full transition-transform duration-300 border-l border-orange-100 flex flex-col">
+        <div class="p-4 border-b flex justify-between items-center bg-orange-50/50">
+            <h3 class="header-title font-bold text-brand-dark text-lg">Keranjang Belanja</h3>
+            <button onclick="toggleCart()" class="text-slate-400 hover:text-slate-600 font-bold text-sm bg-white border rounded-full w-7 h-7 flex items-center justify-center">X</button>
+        </div>
+        <div id="cart-items-container" class="p-4 flex-grow overflow-y-auto space-y-3">
+            </div>
+        <div class="p-4 border-t bg-slate-50">
+            <h4 class="font-bold text-xs text-brand-dark mb-2">Informasi Penerima:</h4>
+            <div class="space-y-2 mb-4">
+                <input type="text" id="cust-name" placeholder="Nama Lengkap Anda..." class="w-full bg-white border text-xs rounded-lg p-2 outline-none focus:border-brand-primary">
+                <textarea id="cust-address" placeholder="Alamat Pengiriman Lengkap..." class="w-full bg-white border text-xs rounded-lg p-2 h-12 resize-none outline-none focus:border-brand-primary"></textarea>
+            </div>
+            <div class="flex justify-between items-center mb-4 font-bold text-sm border-t border-dashed pt-3">
+                <span>Total Bayar:</span><span id="cart-total-price" class="text-brand-primary text-base">Rp 0</span>
+            </div>
+            <button onclick="checkoutViaWA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 text-xs rounded-xl flex items-center justify-center gap-2 transition-colors">
+                <i class="fa-brands fa-whatsapp text-sm"></i> Kirim Pesanan via WhatsApp
             </button>
         </div>
-    </aside>
+    </div>
+    <div id="cart-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
 
-    <main class="flex-grow flex flex-col h-full overflow-hidden bg-slate-50">
-        
-        <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 flex-shrink-0">
-            <div class="flex items-center gap-2">
-                <span id="page-title-text" class="font-bold text-slate-800 text-base">Kelola Menu / Pisang Goreng Coklat Mini</span>
-            </div>
-            <div class="flex items-center gap-2 text-xs font-medium text-slate-500 bg-slate-100 px-3 py-1.5 rounded-full">
-                <i class="fa-solid fa-circle text-emerald-500 text-[8px] animate-pulse"></i> Admin Toko Mini Online
-            </div>
-        </header>
+    <script>
+        // ==========================================
+        // 1. CONFIGURATION & SETTING
+        // ==========================================
+        // SILAKAN GANTI NOMOR WHATSAPP ANDA DI SINI
+        const NOMOR_WHATSAPP = "6281234567890"; 
 
-        <div class="flex-grow p-6 overflow-y-auto flex items-center justify-center">
-            
-            <div id="view-product-container" class="w-full">
-                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col md:flex-row max-w-4xl mx-auto w-full">
-                    <div class="md:w-1/2 aspect-square md:h-auto bg-slate-100">
-                        <img id="prod-detail-img" src="pisang.jpg.jfif" alt="Pisang Goreng Coklat Mini" class="w-full h-full object-cover">
-                    </div>
-                    
-                    <div class="md:w-1/2 p-8 flex flex-col justify-between">
-                        <div>
-                            <span id="prod-detail-tag" class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider inline-block mb-3">Menu Pisang</span>
-                            <h2 id="prod-detail-name" class="font-title text-2xl font-bold text-slate-800 mb-1">Pisang Goreng Coklat Mini</h2>
-                            <p id="prod-detail-desc" class="text-xs text-slate-400 mb-5">Camilan pisang ambon krispi goreng disiram coklat kental manis melimpah ditambah taburan parutan keju gurih melimpah.</p>
+        // ==========================================
+        // 2. LIBRARY DATA PRODUK (Konsep Library Terpusat)
+        // ==========================================
+        const PRODUCT_LIBRARY = [
+            {
+                id: "menu-pisang",
+                name: "Pisang Goreng Coklat Mini",
+                description: "Pisang ambon krispi bertabur saus coklat lumer premium melimpah.",
+                basePrice: 10000,
+                imageFile: "pisang.jpg.jfif", // Sesuai dengan nama file gambar asli milikmu
+                optionsLabel: "Pilih Topping Tambahan:",
+                variants: [
+                    { name: "Coklat Original", extraPrice: 0 },
+                    { name: "Coklat + Taburan Keju", extraPrice: 2000 }
+                ]
+            },
+            {
+                id: "menu-cireng",
+                name: "Cireng Mini Isi Gurih",
+                description: "Cireng mini krispi diluar kenyal didalam dengan variasi isian gurih.",
+                basePrice: 12000,
+                imageFile: "cireng.jpg.jfif", // Sesuai dengan nama file gambar asli milikmu
+                optionsLabel: "Pilih Varian Isi:",
+                variants: [
+                    { name: "Ayam Pedas Suwir (5 pcs)", extraPrice: 0 },
+                    { name: "Keju Lumer (5 pcs)", extraPrice: 0 },
+                    { name: "Sosis Bakar Mayo (5 pcs)", extraPrice: 0 }
+                ]
+            },
+            {
+                id: "menu-donat",
+                name: "Donat Mini Manis",
+                description: "Donat kentang mini empuk, super lembut bertabur topping favorit.",
+                basePrice: 15000,
+                imageFile: "donat.jpg.jfif", // Sesuai dengan nama file gambar asli milikmu
+                optionsLabel: "Pilih Topping:",
+                variants: [
+                    { name: "Gula Halus Klasik", extraPrice: 0 },
+                    { name: "Meses Coklat Manis", extraPrice: 0 },
+                    { name: "Keju Parut Gurih", extraPrice: 2000 }
+                ]
+            }
+        ];
+
+        let cart = [];
+
+        // ==========================================
+        // 3. FUNGSI UNTUK GENERATE TAMPILAN KATALOG & DASHBOARD
+        // ==========================================
+        function initApp() {
+            const gridContainer = document.getElementById('product-grid-container');
+            let generatedHtml = '';
+
+            PRODUCT_LIBRARY.forEach(product => {
+                // Generate opsi dropdown varian dari array library
+                let optionsHtml = '';
+                product.variants.forEach((v, index) => {
+                    const labelHarga = v.extraPrice > 0 ? ` (+Rp ${v.extraPrice.toLocaleString('id-ID')})` : '';
+                    optionsHtml += `<option value="${index}">${v.name}${labelHarga}</option>`;
+                });
+
+                // Template tampilan produk card
+                generatedHtml += `
+                    <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm flex flex-col hover:shadow-md transition-shadow">
+                        <div class="aspect-[4/3] bg-slate-100 overflow-hidden relative border-b">
+                            <img src="${product.imageFile}" alt="${product.name}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300?text=Gambar+Makanan';">
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow">
+                            <h3 class="header-title text-lg font-bold text-brand-dark mb-1">${product.name}</h3>
+                            <p class="text-slate-500 text-xs mb-4 flex-grow">${product.description}</p>
                             
-                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6">
-                                <label id="prod-detail-option-label" class="block
+                            <div class="mb-4">
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">${product.optionsLabel}</label>
+                                <select id="select-${product.id}" class="w-full bg-slate-50 border text-xs rounded-lg p-2 outline-none border-slate-200">
+                                    ${optionsHtml}
+                                </select>
+                            </div>
+
+                            <div class="flex justify-between items-center pt-3 border-t border-slate-50">
+                                <div>
+                                    <span class="text-[10px] text-slate-400 block leading-none">Mulai dari</span>
+                                    <span class="text-base font-bold text-brand-primary">Rp ${product.basePrice.toLocaleString('id-ID')}</span>
+                                </div>
+                                <button onclick="addProductToCart('${product.id}')" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs px-3 py-2 rounded-lg transition-colors">
+                                    + Tambah
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            gridContainer.innerHTML = generatedHtml;
+
+            // Isi Angka ke Dashboard ringkas
+            document.getElementById('dash-total-menu').innerText = PRODUCT_LIBRARY.length;
+            const minPrice = Math.min(...PRODUCT_LIBRARY.map(p => p.basePrice));
+            document.getElementById('dash-min-price').innerText = "Rp " + minPrice.toLocaleString('id-ID');
+        }
+
+        // ==========================================
+        // 4. LOGIKA SISTEM KERANJANG (CART SYSTEM)
+        // ==========================================
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('translate-x-full');
+            document.getElementById('cart-overlay').classList.toggle('hidden');
+        }
+
+        function addProductToCart(productId) {
+            const product = PRODUCT_LIBRARY.find(p => p.id === productId);
+            const selectElement = document.getElementById(`select-${productId}`);
+            const selectedIndex = selectElement.value;
+            const selectedVariant = product.variants[selectedIndex];
+
+            const finalPrice = product.basePrice + selectedVariant.extraPrice;
+
+            // Cek apakah item dengan varian yang sama persis sudah ada di keranjang
+            const existingItem = cart.find(item => item.id === productId && item.variantName === selectedVariant.name);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: product.name,
+                    variantName: selectedVariant.name,
+                    price: finalPrice,
+                    image: product.imageFile,
+                    quantity: 1
+                });
+            }
+
+            updateCartDisplay();
+            
+            // SweetAlert Notifikasi
+            Swal.fire({
+                title: 'Masuk Keranjang!',
+                text: `${product.name} (${selectedVariant.name})`,
+                icon: 'success',
+                timer: 1000,
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end'
+            });
+        }
+
+        function updateCartDisplay() {
+            const container = document.getElementById('cart-items-container');
+            const countElement = document.getElementById('cart-count');
+            const totalElement = document.getElementById('cart-total-price');
+
+            countElement.innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-center text-slate-400 text-xs py-8">Keranjang belanja kosong.</p>';
+                totalElement.innerText = "Rp 0";
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+            cart.forEach((item, idx) => {
+                total += item.price * item.quantity;
+                html += `
+                    <div class="bg-slate-50 p-2 border border-slate-100 rounded-xl flex justify-between items-center text-xs">
+                        <div class="flex items-center gap-2">
+                            <img src="${item.image}" class="w-8 h-8 object-cover rounded" onerror="this.src='https://placehold.co/50x50';">
+                            <div>
+                                <p class="font-bold text-slate-700">${item.name}</p>
+                                <p class="text-[9px] text-slate-400">${item.variantName}</p>
+                                <p class="text-brand-primary font-semibold">Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <button onclick="changeQty(${idx}, -1)" class="bg-white border border-slate-200 w-5 h-5 rounded flex items-center justify-center font-bold text-slate-500 hover:bg-orange-50">-</button>
+                            <span class="font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="changeQty(${idx}, 1)" class="bg-white border border-slate-200 w-5 h-5 rounded flex items-center justify-center font-bold text-slate-500 hover:bg-orange-50">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            totalElement.innerText = "Rp " + total.toLocaleString('id-ID');
+        }
+
+        function changeQty(idx, amt) {
+            cart[idx].quantity += amt;
+            if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+            updateCartDisplay();
+        }
+
+        // ==========================================
+        // 5. CHECKOUT VIA WHATSAPP
+        // ==========================================
+        function checkoutViaWA() {
+            const name = document.getElementById('cust-name').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+
+            if (cart.length === 0) { Swal.fire('Oops!', 'Keranjang masih kosong.', 'warning'); return; }
+            if (!name || !address) { Swal.fire('Belum Lengkap', 'Silakan ketik Nama & Alamat pengiriman dulu ya.', 'info'); return; }
+
+            let msg = `*PESANAN BARU TOKO MINI* 😋\n\n*Detail Penerima:*\n👤 Nama: ${name}\n📍 Alamat: ${address}\n\n*Daftar Jajanan:*\n`;
+            let total = 0;
+            cart.forEach((item, idx) => {
+                total += item.price * item.quantity;
+                msg += `${idx+1}. ${item.name}\n   └ Varian: ${item.variantName} (${item.quantity}x) = Rp ${(item.price * item.quantity).toLocaleString('id-ID')}\n`;
+            });
+            msg += `\n*TOTAL BAYAR: Rp ${total.toLocaleString('id-ID')}*\n\nMohon segera diproses ya Kak, terima kasih! 🙏`;
+
+            window.open(`https://wa.me/${NOMOR_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // Jalankan library saat halaman pertama kali dimuat
+        window.onload = initApp;
+    </script>
+</body>
+</html>
