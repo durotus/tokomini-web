@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kasir Pro - Toko Mini</title>
+    <title>Toko Mini - Jajanan Mini, Lezatnya Maksi!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
@@ -20,9 +20,10 @@
                         inter: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        kasir: {
-                            sidebar: '#2563EB',
-                            bg: '#F8FAFC',
+                        brand: {
+                            light: '#FFFBEB',  /* Cream lembut */
+                            primary: '#D97706', /* Amber/Oranye hangat */
+                            dark: '#78350F',    /* Cokelat gelap */
                         }
                     }
                 }
@@ -30,123 +31,220 @@
         }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
-        .font-title { font-family: 'Fredoka', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FFFDF9; }
+        .header-title { font-family: 'Fredoka', sans-serif; }
     </style>
 </head>
-<body class="flex h-screen overflow-hidden text-slate-700">
+<body class="text-slate-800 flex flex-col min-h-screen">
 
-    <aside class="w-64 bg-kasir-sidebar text-white flex flex-col justify-between shadow-lg z-30 flex-shrink-0">
-        <div>
-            <div class="p-6 border-b border-blue-500 flex items-center gap-3">
-                <i class="fa-solid fa-calculator text-2xl"></i>
-                <span class="font-title text-2xl tracking-wide font-bold">KASIRPRO</span>
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-orange-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <div class="bg-brand-primary text-white w-9 h-9 rounded-full flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-store text-sm"></i>
+                    </div>
+                    <span class="header-title text-xl font-bold text-brand-dark tracking-wide">Toko Mini</span>
+                </div>
+                
+                <button onclick="toggleCartSidebar()" class="relative bg-brand-light hover:bg-orange-100 border border-orange-200 py-1.5 px-4 rounded-full flex items-center gap-2 text-brand-dark transition-all duration-300">
+                    <i class="fa-solid fa-shopping-basket text-base"></i>
+                    <span class="font-semibold text-xs hidden sm:inline">Keranjang Belanja</span>
+                    <span id="cart-badge-count" class="bg-brand-primary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center absolute -top-1 -right-1">0</span>
+                </button>
             </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-b from-orange-50 to-orange-100/20 py-12 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <span class="bg-orange-200/60 text-brand-dark text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-3">Camilan Mini Homemade</span>
+            <h1 class="header-title text-3xl sm:text-5xl font-bold text-brand-dark mb-3">Jajanan Mini, <span class="text-brand-primary">Lezatnya Maksi!</span></h1>
+            <p class="text-slate-500 text-xs sm:text-sm max-w-md mx-auto">Selamat datang di Toko Mini! Pilih menu camilan manis & gurih favoritmu di bawah ini, lalu kirim pesanan langsung ke WhatsApp kami.</p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-12 flex-grow w-full">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <nav class="p-4 space-y-2">
-                <p class="text-blue-200 text-[10px] font-bold uppercase tracking-wider px-3 mb-1">Katalog Jajanan</p>
+            <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm flex flex-col hover:shadow-md transition-shadow">
+                <div class="aspect-[4/3] bg-slate-100 overflow-hidden border-b border-slate-100">
+                    <img src="pisang.jpg.jfif" alt="Pisang Goreng Coklat Mini" class="w-full h-full object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="header-title text-lg font-bold text-brand-dark mb-1">Pisang Goreng Coklat Mini</h3>
+                    <p class="text-slate-500 text-xs mb-4 flex-grow">Pisang ambon krispi goreng disiram coklat kental manis melimpah ditambah taburan parutan keju gurih melimpah.</p>
+                    
+                    <div class="mb-4">
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Topping:</label>
+                        <select id="pilihan-pisang" class="w-full bg-slate-50 border border-slate-200 text-xs rounded-lg p-2 outline-none text-slate-700">
+                            <option value="Saus Coklat Original">Saus Coklat Original (Rp 10.000)</option>
+                            <option value="Saus Coklat + Taburan Keju">Saus Coklat + Taburan Keju (Rp 12.000)</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                        <span class="text-base font-bold text-brand-primary">Rp 10.000</span>
+                        <button onclick="masukKeranjang('Pisang Goreng Coklat Mini', 'pilihan-pisang', 10000)" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs px-3 py-2 rounded-lg transition-colors">
+                            + Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                <button onclick="bukaMenu('box-pisang', this)" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium bg-blue-700 text-white tombol-nav">
-                    <span>🍌</span> Pisang Goreng Coklat
-                </button>
+            <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm flex flex-col hover:shadow-md transition-shadow">
+                <div class="aspect-[4/3] bg-slate-100 overflow-hidden border-b border-slate-100">
+                    <img src="cireng.jpg.jfif" alt="Cireng Mini Isi Gurih" class="w-full h-full object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="header-title text-lg font-bold text-brand-dark mb-1">Cireng Mini Isi Gurih</h3>
+                    <p class="text-slate-500 text-xs mb-4 flex-grow">Cireng pastel mini dengan tekstur renyah di luar, kenyal kenyal di dalam, lengkap diisi bumbu padat premium pilihan.</p>
+                    
+                    <div class="mb-4">
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Isian Rasa:</label>
+                        <select id="pilihan-cireng" class="w-full bg-slate-50 border border-slate-200 text-xs rounded-lg p-2 outline-none text-slate-700">
+                            <option value="Ayam Pedas Suwir Booming">Ayam Pedas Suwir Booming (Rp 12.000 / 5 pcs)</option>
+                            <option value="Keju Melted Lumer">Keju Melted Lumer (Rp 12.000 / 5 pcs)</option>
+                            <option value="Sosis Bakar Mayonaise">Sosis Bakar Mayonaise (Rp 12.000 / 5 pcs)</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                        <span class="text-base font-bold text-brand-primary">Rp 12.000</span>
+                        <button onclick="masukKeranjang('Cireng Mini Isi Gurih', 'pilihan-cireng', 12000)" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs px-3 py-2 rounded-lg transition-colors">
+                            + Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                <button onclick="bukaMenu('box-cireng', this)" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-blue-100 hover:bg-blue-700/50 hover:text-white tombol-nav">
-                    <span>🥟</span> Cireng Isi Gurih
-                </button>
+            <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm flex flex-col hover:shadow-md transition-shadow">
+                <div class="aspect-[4/3] bg-slate-100 overflow-hidden border-b border-slate-100">
+                    <img src="donat.jpg.jfif" alt="Donat Mini Manis" class="w-full h-full object-cover">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="header-title text-lg font-bold text-brand-dark mb-1">Donat Mini Manis</h3>
+                    <p class="text-slate-500 text-xs mb-4 flex-grow">Donat adonan kentang super lembut, empuk montok dengan bervariasi jenis matcha, keju, meses warna-warni yang estetik.</p>
+                    
+                    <div class="mb-4">
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Topping:</label>
+                        <select id="pilihan-donat" class="w-full bg-slate-50 border border-slate-200 text-xs rounded-lg p-2 outline-none text-slate-700">
+                            <option value="Gula Halus Klasik">Gula Halus Klasik (Rp 15.000)</option>
+                            <option value="Meses Coklat Manis Ceres">Meses Coklat Manis Ceres (Rp 15.000)</option>
+                            <option value="Keju Parut Cheddar Gurih">Keju Parut Cheddar Gurih (Rp 17.000)</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                        <span class="text-base font-bold text-brand-primary">Rp 15.000</span>
+                        <button onclick="masukKeranjang('Donat Mini Manis', 'pilihan-donat', 15000)" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs px-3 py-2 rounded-lg transition-colors">
+                            + Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                <button onclick="bukaMenu('box-donat', this)" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-blue-100 hover:bg-blue-700/50 hover:text-white tombol-nav">
-                    <span>🍩</span> Donat Mini Manis
-                </button>
-            </nav>
+        </div>
+    </main>
+
+    <footer class="bg-brand-dark text-orange-200/80 py-6 text-center text-xs border-t border-orange-900/10">
+        <p>&copy; 2026 Toko Mini. All Rights Reserved. Made with ❤️</p>
+    </footer>
+
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-2xl translate-x-full transition-transform duration-300 border-l border-orange-100 flex flex-col">
+        <div class="p-4 border-b flex justify-between items-center bg-orange-50/50">
+            <h3 class="header-title font-bold text-brand-dark text-base"><i class="fa-solid fa-shopping-basket"></i> Keranjang Belanja</h3>
+            <button onclick="toggleCartSidebar()" class="text-slate-400 hover:text-slate-600 font-bold text-xs border rounded-full w-6 h-6 flex items-center justify-center bg-white">X</button>
+        </div>
+        
+        <div id="cart-items-list" class="p-4 flex-grow overflow-y-auto space-y-3">
+            <p class="text-center text-slate-400 text-xs py-10">Keranjang belanjaanmu kosong.</p>
         </div>
 
-        <div class="p-4 border-t border-blue-500 bg-blue-700/40">
-            <button onclick="bukaModalKeranjang()" class="w-full bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold py-2.5 px-4 rounded-xl flex items-center justify-between shadow transition-colors">
-                <span class="flex items-center gap-2"><i class="fa-solid fa-shopping-basket"></i> Lihat Keranjang</span>
-                <span id="badge-jumlah-keranjang" class="bg-white text-amber-600 px-2 py-0.5 rounded-full text-[10px]">0</span>
+        <div class="p-4 border-t bg-slate-50 border-orange-100">
+            <h4 class="font-bold text-[11px] text-brand-dark mb-2 uppercase tracking-wide">Informasi Pengiriman:</h4>
+            <div class="space-y-2 mb-4">
+                <input type="text" id="cust-name" placeholder="Nama Lengkap Anda..." class="w-full bg-white border text-xs rounded-xl p-2.5 outline-none border-slate-200 focus:border-brand-primary">
+                <textarea id="cust-address" placeholder="Alamat Lengkap Pengiriman..." class="w-full bg-white border text-xs rounded-xl p-2.5 h-14 resize-none outline-none border-slate-200 focus:border-brand-primary"></textarea>
+            </div>
+            <div class="flex justify-between items-center mb-4 font-bold text-xs text-slate-600 border-t border-dashed pt-3">
+                <span>Total Pembayaran:</span><span id="cart-total-price" class="text-brand-primary text-base font-bold">Rp 0</span>
+            </div>
+            <button onclick="kirimNotaKeWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 text-xs rounded-xl flex items-center justify-center gap-2 shadow-md shadow-emerald-600/10 transition-colors">
+                <i class="fa-brands fa-whatsapp text-sm"></i> Kirim Pesanan ke WhatsApp
             </button>
         </div>
-    </aside>
+    </div>
+    <div id="cart-overlay" onclick="toggleCartSidebar()" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
 
-    <main class="flex-grow flex flex-col h-full overflow-hidden bg-slate-50">
-        
-        <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 flex-shrink-0">
-            <span id="judul-atas" class="font-bold text-slate-800 text-base">Kelola Menu / Pisang Goreng Coklat Mini</span>
-            <div class="text-xs font-medium text-slate-500 bg-slate-100 px-3 py-1.5 rounded-full">Admin Toko Mini Online</div>
-        </header>
+    <script>
+        // SILAKAN MASUKKAN NOMOR WHATSAPP ANDA DI SINI (Gunakan kode negara 62)
+        const NOMOR_WHATSAPP = "6281234567890"; 
 
-        <div class="flex-grow p-6 overflow-y-auto flex items-center justify-center">
+        let listBelanja = [];
+
+        // Fungsi Buka Tutup Panel Keranjang Samping
+        function toggleCartSidebar() {
+            document.getElementById('cart-sidebar').classList.toggle('translate-x-full');
+            document.getElementById('cart-overlay').classList.toggle('hidden');
+        }
+
+        // Fungsi Masuk Keranjang Belanja
+        function masukKeranjang(namaMakanan, idSelect, hargaDasar) {
+            const selectElement = document.getElementById(idSelect);
+            const varianPilihan = selectElement.options[selectElement.selectedIndex].value;
+
+            // Logika penambahan nominal harga otomatis untuk topping keju parut
+            let hargaAkhir = hargaDasar;
+            if (varianPilihan.includes("Cheddar Gurih") || varianPilihan.includes("Taburan Keju")) {
+                hargaAkhir = hargaDasar + 2000;
+            }
+
+            // Cek apabila menu varian yang sama persis sudah dimasukkan sebelumnya
+            const sudahAda = listBelanja.find(item => item.nama === namaMakanan && item.varian === varianPilihan);
+
+            if (sudahAda) {
+                sudahAda.qty += 1;
+            } else {
+                listBelanja.push({
+                    nama: namaMakanan,
+                    varian: varianPilihan,
+                    harga: hargaAkhir,
+                    qty: 1
+                });
+            }
+
+            updateTampilanKeranjang();
             
-            <div id="box-pisang" class="w-full max-w-4xl bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col md:flex-row halaman-menu">
-                <div class="md:w-1/2 aspect-square md:h-auto bg-slate-100">
-                    <img src="pisang.jpg.jfif" alt="Pisang Goreng" class="w-full h-full object-cover">
-                </div>
-                <div class="md:w-1/2 p-8 flex flex-col justify-between">
-                    <div>
-                        <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider inline-block mb-3">Menu Pisang</span>
-                        <h2 class="font-title text-2xl font-bold text-slate-800 mb-1">Pisang Goreng Coklat Mini</h2>
-                        <p class="text-xs text-slate-400 mb-5">Camilan pisang ambon krispi goreng disiram coklat kental manis melimpah ditambah taburan parutan keju gurih melimpah.</p>
-                        
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6">
-                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1.5">Kriteria Topping Tambahan:</label>
-                            <select id="pilihan-pisang" class="w-full bg-white border border-slate-300 text-xs rounded-lg p-2.5 outline-none font-medium text-slate-700">
-                                <option value="Saus Coklat Original">Saus Coklat Original (Rp 10.000)</option>
-                                <option value="Saus Coklat + Taburan Keju">Saus Coklat + Taburan Keju (Rp 12.000)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-                        <span class="text-xl font-bold text-blue-600">Rp 10.000</span>
-                        <button onclick="tambahKeNota('Pisang Goreng Coklat Mini', 'pilihan-pisang', 10000)" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs py-3 px-5 rounded-xl shadow-md transition-colors">+ Masukkan Nota</button>
-                    </div>
-                </div>
-            </div>
+            // SweetAlert Notifikasi Kecil Sukses
+            Swal.fire({ title: 'Ditambahkan!', text: namaMakanan, icon: 'success', timer: 1000, showConfirmButton: false, toast: true, position: 'top-end' });
+        }
 
-            <div id="box-cireng" class="w-full max-w-4xl bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col md:flex-row halaman-menu hidden">
-                <div class="md:w-1/2 aspect-square md:h-auto bg-slate-100">
-                    <img src="cireng.jpg.jfif" alt="Cireng Isi" class="w-full h-full object-cover">
-                </div>
-                <div class="md:w-1/2 p-8 flex flex-col justify-between">
-                    <div>
-                        <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider inline-block mb-3">Menu Cireng</span>
-                        <h2 class="font-title text-2xl font-bold text-slate-800 mb-1">Cireng Mini Isi Gurih</h2>
-                        <p class="text-xs text-slate-400 mb-5">Cireng pastel mini dengan tekstur renyah di luar, kenyal kenyal di dalam, lengkap diisi bumbu padat premium pilihan.</p>
-                        
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6">
-                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1.5">Kriteria Isian Rasa:</label>
-                            <select id="pilihan-cireng" class="w-full bg-white border border-slate-300 text-xs rounded-lg p-2.5 outline-none font-medium text-slate-700">
-                                <option value="Ayam Pedas Suwir Booming">Ayam Pedas Suwir Booming (Rp 12.000 / 5 pcs)</option>
-                                <option value="Keju Melted Lumer">Keju Melted Lumer (Rp 12.000 / 5 pcs)</option>
-                                <option value="Sosis Bakar Mayonaise">Sosis Bakar Mayonaise (Rp 12.000 / 5 pcs)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-                        <span class="text-xl font-bold text-blue-600">Rp 12.000</span>
-                        <button onclick="tambahKeNota('Cireng Mini Isi Gurih', 'pilihan-cireng', 12000)" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs py-3 px-5 rounded-xl shadow-md transition-colors">+ Masukkan Nota</button>
-                    </div>
-                </div>
-            </div>
+        // Fungsi Memperbarui List Data di Dalam Keranjang Samping
+        function updateTampilanKeranjang() {
+            const wadahList = document.getElementById('cart-items-list');
+            const badgeAngka = document.getElementById('cart-badge-count');
+            const teksTotal = document.getElementById('cart-total-price');
 
-            <div id="box-donat" class="w-full max-w-4xl bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col md:flex-row halaman-menu hidden">
-                <div class="md:w-1/2 aspect-square md:h-auto bg-slate-100">
-                    <img src="donat.jpg.jfif" alt="Donat Mini" class="w-full h-full object-cover">
-                </div>
-                <div class="md:w-1/2 p-8 flex flex-col justify-between">
-                    <div>
-                        <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider inline-block mb-3">Menu Donat</span>
-                        <h2 class="font-title text-2xl font-bold text-slate-800 mb-1">Donat Mini Manis</h2>
-                        <p class="text-xs text-slate-400 mb-5">Donat adonan kentang super lembut, empuk montok dengan bervariasi jenis matcha, keju, meses warna-warni yang estetik.</p>
-                        
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6">
-                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1.5">Kriteria Rasa Atas Topping:</label>
-                            <select id="pilihan-donat" class="w-full bg-white border border-slate-300 text-xs rounded-lg p-2.5 outline-none font-medium text-slate-700">
-                                <option value="Gula Halus Klasik">Gula Halus Klasik (Rp 15.000)</option>
-                                <option value="Meses Coklat Manis Ceres">Meses Coklat Manis Ceres (Rp 15.000)</option>
-                                <option value="Keju Parut Cheddar Gurih">Keju Parut Cheddar Gurih (Rp 17.000)</option>
-                            </select>
+            // Hitung total kuantitas kuantitas barang
+            const totalQty = listBelanja.reduce((total, item) => total + item.qty, 0);
+            badgeAngka.innerText = totalQty;
+
+            if (listBelanja.length === 0) {
+                wadahList.innerHTML = '<p class="text-center text-slate-400 text-xs py-10">Keranjang belanjaanmu kosong.</p>';
+                teksTotal.innerText = "Rp 0";
+                return;
+            }
+
+            let htmlKonten = '';
+            let akumulasiTotal = 0;
+
+            listBelanja.forEach((item, index) => {
+                const totalItem = item.harga * item.qty;
+                akumulasiTotal += totalItem;
+
+                htmlKonten += `
+                    <div class="bg-slate-50 p-3 border border-slate-100 rounded-xl flex justify-between items-center text-xs">
+                        <div>
+                            <p class="font-bold text-slate-700">${item.nama}</p>
+                            <p class="text-[10px] text-slate-400 font-medium">${item.varian}</p>
+                            <p class="text-brand-primary font-semibold mt-0.5">Rp ${item.harga.toLocaleString('id-ID')} x ${item.qty}</p>
                         </div>
-                    </div>
-                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-                        <span class="text-xl font-bold text-blue-600">Rp 15.000</span>
-                        <button onclick="t
+                        <div class="flex items-center gap-1
