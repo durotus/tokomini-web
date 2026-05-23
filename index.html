@@ -60,7 +60,7 @@
         <div class="max-w-4xl mx-auto px-4">
             <span class="bg-orange-200/60 text-brand-dark text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-3">Camilan Homemade</span>
             <h1 class="header-title text-3xl sm:text-5xl font-bold text-brand-dark mb-3">"Rasa Lengkap, <span class="text-brand-primary">Saku Hemat."</span></h1>
-            <p class="text-slate-500 text-xs sm:text-sm max-w-md mx-auto">Silakan pilih menu camilan, sesuaikan rasa rasa manis & gurih favoritmu, lalu kirim langsung ke WhatsApp kami.</p>
+            <p class="text-slate-500 text-xs sm:text-sm max-w-md mx-auto">Silakan pilih menu camilan, sesuaikan rasa manis & gurih favoritmu, lalu kirim langsung ke WhatsApp kami.</p>
         </div>
     </header>
 
@@ -72,24 +72,32 @@
                     <img src="pisang.jpg.jfif" alt="Pisang Goreng Coklat Mini" class="w-full h-full object-cover">
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
-                    <h3 class="header-title text-lg font-bold text-brand-dark mb-1">Pisang Goreng Coklat </h3>
+                    <h3 class="header-title text-lg font-bold text-brand-dark mb-1">Pisang Goreng Coklat</h3>
                     <p class="text-slate-500 text-xs mb-4 flex-grow">Pisang ambon krispi goreng disiram coklat kental manis melimpah ditambah taburan parutan keju gurih melimpah.</p>
                     
-                    <div class="mb-4">
-                         <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Rasa Utama (Base):</label>
-                        <select id="donat-glaze" class="w-full bg-white border border-slate-200 text-xs rounded-lg p-2 outline-none text-slate-700 font-medium">
-                            <option value="Rasa Matcha">medium</option>
-                            <option value="Rasa Stroberi">small</option>
-                        </select>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Topping:</label>
-                        <select id="pilihan-pisang" class="w-full bg-slate-50 border border-slate-200 text-xs rounded-lg p-2 outline-none text-slate-700 font-medium">
-                            <option value="Saus Coklat Original">Saus Coklat Original (Rp 10.000)</option>
-                            <option value="Saus Coklat + Taburan Keju">Saus Coklat + Taburan Keju (Rp 12.000)</option>
+                    <div class="mb-3">
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Pilih Ukuran Porsi:</label>
+                        <select id="pisang-porsi" class="w-full bg-white border border-slate-200 text-xs rounded-lg p-2 outline-none text-slate-700 font-medium">
+                            <option value="Ukuran Small">Small (Rp 10.000)</option>
+                            <option value="Ukuran Medium">Medium (Rp 13.000)</option>
                         </select>
                     </div>
+
+                    <div class="mb-4 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Tambah Topping (+Rp 2.000 / item):</label>
+                        <div class="grid grid-cols-2 gap-x-2 gap-y-1.5 text-xs">
+                           
+                            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="topping-pisang" value="Keju" class="rounded accent-brand-primary"> Keju</label>
+                           
+                        </div>
+                    </div>
+
                     <div class="flex justify-between items-center pt-3 border-t border-slate-100">
-                        <span class="text-base font-bold text-brand-primary">Rp 10.000</span>
-                        <button onclick="masukKeranjangPisangCireng('Pisang Goreng Coklat ', 'pilihan-pisang', 10000)" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs px-3 py-2 rounded-lg transition-colors">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block leading-none">Mulai dari</span>
+                            <span class="text-base font-bold text-brand-primary">Rp 10.000</span>
+                        </div>
+                        <button onclick="masukKeranjangPisangKustom()" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs px-3 py-2 rounded-lg transition-colors">
                             + Tambah
                         </button>
                     </div>
@@ -101,7 +109,7 @@
                     <img src="cireng.jpg.jfif" alt="Cireng Mini Isi Gurih" class="w-full h-full object-cover">
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
-                    <h3 class="header-title text-lg font-bold text-brand-dark mb-1">Cireng Isi </h3>
+                    <h3 class="header-title text-lg font-bold text-brand-dark mb-1">Cireng Isi</h3>
                     <p class="text-slate-500 text-xs mb-4 flex-grow">Cireng pastel dengan tekstur renyah di luar, kenyal gurih di dalam dengan isian premium pilihan rasa masakan rumah.</p>
                     
                     <div class="mb-4">
@@ -114,7 +122,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-3 border-t border-slate-100">
                         <span class="text-base font-bold text-brand-primary">Rp 12.000</span>
-                        <button onclick="masukKeranjangPisangCireng('Cireng Isi ', 'pilihan-cireng', 12000)" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs px-3 py-2 rounded-lg transition-colors">
+                        <button onclick="masukKeranjangCireng('Cireng Isi', 'pilihan-cireng', 12000)" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs px-3 py-2 rounded-lg transition-colors">
                             + Tambah
                         </button>
                     </div>
@@ -134,9 +142,9 @@
                         <select id="donat-glaze" class="w-full bg-white border border-slate-200 text-xs rounded-lg p-2 outline-none text-slate-700 font-medium">
                             <option value="Rasa Coklat">Rasa Coklat (Rp 15.000)/9pcs</option>
                             <option value="Rasa Matcha">Rasa Matcha (Rp 15.000)/9pcs</option>
-                            <option value="Rasa Stroberi">Rasa Stroberi (Rp 15.000)/9pcs</option>
+                            <option value="Rasa Stroberi">Rasa Rasa Stroberi (Rp 15.000)/9pcs</option>
                             <option value="Rasa Bluberi">Rasa Bluberi (Rp 15.000)/9pcs</option>
-                            <option value="Rasa Tiramisu">Rasa Tiramisu (Rp 15.000)9pcs</option>
+                            <option value="Rasa Tiramisu">Rasa Tiramisu (Rp 15.000)/9pcs</option>
                             <option value="Rasa Random">Rasa Random (Rp 15.000)/9pcs</option>
                         </select>
                     </div>
@@ -168,10 +176,6 @@
         </div>
     </main>
 
-    <footer class="bg-brand-dark text-orange-200/80 py-6 text-center text-xs mt-auto">
-        <p>&copy; 2026 Toko Mini. All Rights Reserved. Made with ❤️</p>
-    </footer>
-
     <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-2xl translate-x-full transition-transform duration-300 border-l border-orange-100 flex flex-col">
         <div class="p-4 border-b flex justify-between items-center bg-orange-50/50">
             <h3 class="header-title font-bold text-brand-dark text-base"><i class="fa-solid fa-shopping-basket"></i> Keranjang Belanja</h3>
@@ -199,7 +203,6 @@
     <div id="cart-overlay" onclick="toggleCartSidebar()" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
 
     <script>
-        // MASUKKAN NOMOR WHATSAPP ANDA DI SINI (Ganti dengan nomormu sendiri seperti langkah sebelumnya)
         const NOMOR_WHATSAPP = "628137385186"; 
 
         let listBelanja = [];
@@ -209,48 +212,81 @@
             document.getElementById('cart-overlay').classList.toggle('hidden');
         }
 
-        // Fungsi Masuk Keranjang untuk Pisang dan Cireng Biasa
-        function masukKeranjangPisangCireng(namaMakanan, idSelect, hargaDasar) {
+        // FUNGSI BARU: Hitung Otomatis Kustomisasi Pisang Goreng
+        function masukKeranjangPisangKustom() {
+            const porsiElement = document.getElementById('pisang-porsi');
+            const porsiPilihan = porsiElement.options[porsiElement.selectedIndex].value;
+            
+            // Atur harga awal porsi (Small = 10rb, Medium = 13rb)
+            let hargaDasar = porsiPilihan === "Ukuran Medium" ? 13000 : 10000;
+
+            // Ambil semua topping pisang yang dicentang
+            const checkboxes = document.querySelectorAll('input[name="topping-pisang"]:checked');
+            let toppingList = [];
+            let totalBiayaTopping = 0;
+
+            checkboxes.forEach(cb => {
+                toppingList.push(cb.value);
+                totalBiayaTopping += 2000; // Tiap topping menambah Rp 2.000
+            });
+
+            const infoTopping = toppingList.length > 0 ? " + Topping (" + toppingList.join(', ') + ")" : " (Original Coklat)";
+            const namaVarianGabungan = `${porsiPilihan}${infoTopping}`;
+            const hargaFinalPisang = hargaDasar + totalBiayaTopping;
+
+            const sudahAda = listBelanja.find(item => item.nama === 'Pisang Goreng Coklat' && item.varian === namaVarianGabungan);
+            if (sudahAda) {
+                sudahAda.qty += 1;
+            } else {
+                listBelanja.push({
+                    nama: 'Pisang Goreng Coklat',
+                    varian: namaVarianGabungan,
+                    harga: hargaFinalPisang,
+                    qty: 1
+                });
+            }
+
+            // Reset checkbox biar bersih kembali
+            checkboxes.forEach(cb => cb.checked = false);
+
+            updateTampilanKeranjang();
+            Swal.fire({ title: 'Pisang Ditambahkan!', text: porsiPilihan, icon: 'success', timer: 1000, showConfirmButton: false, toast: true, position: 'top-end' });
+        }
+
+        // Fungsi Masuk Keranjang Cireng
+        function masukKeranjangCireng(namaMakanan, idSelect, hargaDasar) {
             const selectElement = document.getElementById(idSelect);
             const varianPilihan = selectElement.options[selectElement.selectedIndex].value;
-
-            let hargaAkhir = hargaDasar;
-            if (varianPilihan.includes("Taburan Keju")) {
-                hargaAkhir = hargaDasar + 2000;
-            }
 
             const sudahAda = listBelanja.find(item => item.nama === namaMakanan && item.varian === varianPilihan);
             if (sudahAda) {
                 sudahAda.qty += 1;
             } else {
-                listBelanja.push({ nama: namaMakanan, varian: varianPilihan, harga: hargaAkhir, qty: 1 });
+                listBelanja.push({ nama: namaMakanan, varian: varianPilihan, harga: hargaDasar, qty: 1 });
             }
 
             updateTampilanKeranjang();
             Swal.fire({ title: 'Ditambahkan!', text: namaMakanan, icon: 'success', timer: 1000, showConfirmButton: false, toast: true, position: 'top-end' });
         }
 
-        // Fungsi Kustomisasi Topping Khusus Donat Mini (+2000 per topping terpilih)
+        // Fungsi Kustomisasi Topping Donat Mini
         function masukKeranjangDonatKustom() {
             const glazeElement = document.getElementById('donat-glaze');
             const rasaDasar = glazeElement.options[glazeElement.selectedIndex].value;
             
-            // Ambil semua checkbox topping yang dicentang oleh pembeli
             const checkboxes = document.querySelectorAll('input[name="topping-donat"]:checked');
             let toppingList = [];
             let totalBiayaTopping = 0;
 
             checkboxes.forEach(cb => {
                 toppingList.push(cb.value);
-                totalBiayaTopping += 2000; // Tiap topping nambah 2000 rupiah
+                totalBiayaTopping += 2000;
             });
 
-            // Susun nama keterangan rasa dan varian toppingnya
             const infoTopping = toppingList.length > 0 ? " + Topping (" + toppingList.join(', ') + ")" : " (Polos Tanpa Topping)";
             const namaVarianGabungan = `${rasaDasar}${infoTopping}`;
             const hargaFinalDonat = 15000 + totalBiayaTopping;
 
-            // Masukkan ke keranjang belanja
             const sudahAda = listBelanja.find(item => item.nama === 'Donat Mini Manis' && item.varian === namaVarianGabungan);
             if (sudahAda) {
                 sudahAda.qty += 1;
@@ -263,14 +299,13 @@
                 });
             }
 
-            // Bersihkan centang-centang checkbox donat agar siap dipakai order baru lagi
             checkboxes.forEach(cb => cb.checked = false);
 
             updateTampilanKeranjang();
             Swal.fire({ title: 'Donat Ditambahkan!', text: rasaDasar, icon: 'success', timer: 1100, showConfirmButton: false, toast: true, position: 'top-end' });
         }
 
-        // Memperbarui UI Keranjang Belanjaan Samping
+        // Memperbarui Keranjang Samping
         function updateTampilanKeranjang() {
             const wadahList = document.getElementById('cart-items-list');
             const badgeAngka = document.getElementById('cart-badge-count');
@@ -318,7 +353,7 @@
             updateTampilanKeranjang();
         }
 
-        // Kirim Struk Transaksi Rapi Terformat ke WhatsApp Pengelola
+        // Kirim Pesanan via WA
         function kirimNotaKeWhatsApp() {
             const namaCust = document.getElementById('cust-name').value.trim();
             const alamatCust = document.getElementById('cust-address').value.trim();
@@ -326,7 +361,7 @@
             if (listBelanja.length === 0) { Swal.fire('Keranjang Kosong', 'Pilih menu camilan terlebih dahulu ya.', 'warning'); return; }
             if (!namaCust || !alamatCust) { Swal.fire('Belum Lengkap', 'Harap isi Nama dan Alamat pengiriman kamu.', 'info'); return; }
 
-            let strukTxt = `*HALO TOKO MINI! SAYA MAU PESAN CAMILAN* 😋\n\n*Data Pemesan:*\n👤 Nama: ${namaCust}\n📍 Alamat Kirim: ${alamatCust}\n\n*Rincian Daftar Belanja:*\n`;
+            let strukTxt = `*HALO TOKO MINI! SAYA MAU PESAN* 😋\n\n*Data Pemesan:*\n👤 Nama: ${namaCust}\n📍 Alamat Kirim: ${alamatCust}\n\n*Rincian Daftar Belanja:*\n`;
             let totalBiaya = 0;
 
             listBelanja.forEach((item, index) => {
@@ -337,7 +372,7 @@
 
             strukTxt += `-------------------------------------------\n`;
             strukTxt += `*TOTAL PEMBAYARAN: Rp ${totalBiaya.toLocaleString('id-ID')}*\n`;
-            strukTxt += `-------------------------------------------\n\nMohon segera diproses pesonannya ya Kak. Terima kasih! 🙏`;
+            strukTxt += `-------------------------------------------\n\nMohon segera diproses ya Kak. Terima kasih! 🙏`;
 
             window.open(`https://wa.me/${NOMOR_WHATSAPP}?text=${encodeURIComponent(strukTxt)}`, '_blank');
         }
